@@ -1,0 +1,153 @@
+#!/bin/bash
+#
+# brewcask-createzap
+#
+# A `brew cask` external command that generates zap stanza.
+# Example usage:
+#
+#     brew cask createzap appname
+#
+
+readonly TMP_FILE_DELETE="/tmp/brewcask-createzap-delete"
+readonly TMP_FILE_TRASH="/tmp/brewcask-createzap-trash"
+readonly DELETE_PATHS=(
+  "$HOME/Library"
+  "$HOME/Library/Application Scripts"
+  "$HOME/Library/Caches"
+  "$HOME/Library/Caches/com.apple.helpd/Generated"
+  "$HOME/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile"
+  "$HOME/Library/Containers"
+  "$HOME/Library/Containers"
+  "$HOME/Library/Cookies"
+  "$HOME/Library/Group Containers"
+  "$HOME/Library/LaunchAgents"
+  "$HOME/Library/Logs"
+#  "$HOME/Library/PreferencePanes"
+  "$HOME/Library/Saved Application State"
+  "$HOME/Library/WebKit"
+  "$HOME/Music"
+  "/Library/LaunchDaemons"
+  "/Library/PreferencePanes"
+  "/Library/PrivilegedHelperTools"
+  "/Library/Screen Savers"
+  "/Library/ScriptingAdditions"
+  "/Library/Services"
+  "/etc/newsyslog.d"
+  "/tmp"
+)
+readonly TRASH_PATHS=(
+  "$HOME/Documents"
+  "$HOME/Library/Application Support"
+  "$HOME/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments"
+  "$HOME/Library/Preferences"
+  "/Library/Application Support"
+  "/Library/Preferences"
+  "/Users/Shared"
+)
+
+main() {
+  check_args "$@"
+  create_tmp
+  find_in_paths "$1"
+  find_in_home_folder "$1"
+  generate "$1"
+  delete_tmp
+}
+
+check_args() {
+  if [ $# != 1 ]
+  then
+    cat <<EOS
+Usage: brew cask createzap appname
+
+Given an Application name (full or partial), find all
+preferences items associated with that app and creates
+zap stanza, which you can copy to new formula created
+by 'brew cask create my-new-cask'
+
+Note that you will likely need to have opened the app
+at least once for any preference items to be present.
+EOS
+    exit 1
+  fi
+}
+
+create_tmp() {
+  touch $TMP_FILE_DELETE
+  touch $TMP_FILE_TRASH
+}
+
+find_in_paths() {
+  let i=1
+  for dir in "${DELETE_PATHS[@]}"; do
+    cd "$dir"
+    ls -d1 "$PWD/"* | grep -i "$1" >> $TMP_FILE_DELETE
+  done
+  i=0
+  for dir in "${TRASH_PATHS[@]}"; do
+    cd "$dir"
+    ls -d1 "$PWD/"* | grep -i "$1" >> $TMP_FILE_TRASH
+  done
+}
+
+find_in_home_folder() {
+  cd $HOME
+  ls -d1 "$PWD/".* | grep -i "$1" >> $TMP_FILE_TRASH
+}
+
+generate() {
+  delete_lines=$(cat $TMP_FILE_DELETE | wc -l)
+  trash_lines=$(cat $TMP_FILE_TRASH | wc -l)
+  if [ $delete_lines == 0 ] && [ $trash_lines == 0 ]; then
+    echo "No $1 setting found."
+  elif [ $delete_lines == 0 ] && [ $trash_lines == 1 ]; then
+    path=$(cat $TMP_FILE_TRASH)
+    echo "zap trash: '${path/$HOME/~}'"
+  elif [ $delete_lines == 1 ] && [ $trash_lines == 0 ]; then
+    path=$(cat $TMP_FILE_DELETE)
+    echo "zap delete: '${path/$HOME/~}'"
+  elif [ $delete_lines == 1 ] && [ $trash_lines == 1 ]; then
+    path=$(cat $TMP_FILE_DELETE)
+    echo "zap delete: '${path/$HOME/~}',"
+    path=$(cat $TMP_FILE_TRASH)
+    echo "     trash: '${path/$HOME/~}'"
+  elif [ $delete_lines == 1 ] && [ $trash_lines > 1 ]; then
+    path=$(cat $TMP_FILE_DELETE)
+    echo "zap delete: '${path/$HOME/~}',"
+    echo "     trash: ["
+    cat $TMP_FILE_TRASH | while read path
+    do
+       echo "             '${path/$HOME/~}',"
+    done
+    echo '            ]'
+  elif [ $delete_lines > 1 ] && [ $trash_lines == 1 ]; then
+    echo "zap delete: ["
+    cat $TMP_FILE_DELETE | while read path
+    do
+       echo "             '${path/$HOME/~}',"
+    done
+    echo '            ],'
+    path=$(cat $TMP_FILE_TRASH)
+    echo "     trash: '${path/$HOME/~}'"
+  else
+    echo "zap delete: ["
+    cat $TMP_FILE_DELETE | while read path
+    do
+       echo "             '${path/$HOME/~}',"
+    done
+    echo '            ],'
+    echo "     trash: ["
+    cat $TMP_FILE_TRASH | while read path
+    do
+       echo "             '${path/$HOME/~}',"
+    done
+    echo '            ]'
+  fi
+}
+
+delete_tmp() {
+  rm $TMP_FILE_DELETE
+  rm $TMP_FILE_TRASH
+}
+
+main "$@"
