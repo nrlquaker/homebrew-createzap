@@ -17,7 +17,6 @@ readonly DELETE_PATHS=(
   "$HOME/Library/Caches/com.apple.helpd/Generated"
   "$HOME/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile"
   "$HOME/Library/Containers"
-  "$HOME/Library/Containers"
   "$HOME/Library/Cookies"
   "$HOME/Library/Group Containers"
   "$HOME/Library/LaunchAgents"
