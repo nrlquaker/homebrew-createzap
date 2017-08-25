@@ -13,6 +13,7 @@ readonly TMP_FILE_TRASH="/tmp/brewcask-createzap-trash"
 readonly DELETE_PATHS=(
   "$HOME/Library"
   "$HOME/Library/Application Scripts"
+  "$HOME/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments"
   "$HOME/Library/Caches"
   "$HOME/Library/Caches/com.apple.helpd/Generated"
   "$HOME/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile"
@@ -37,7 +38,6 @@ readonly DELETE_PATHS=(
 readonly TRASH_PATHS=(
   "$HOME/Documents"
   "$HOME/Library/Application Support"
-  "$HOME/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments"
   "$HOME/Library/Preferences"
   "/Library/Application Support"
   "/Library/Preferences"
