@@ -12,6 +12,8 @@ A `brew cask` [external command](https://github.com/caskroom/homebrew-cask/blob/
 ...
 ```
 
+Install: `curl https://raw.githubusercontent.com/nrlquaker/brewcask-createzap/master/brewcask-createzap -s -o /usr/local/bin/brewcask-createzap`
+
 Usage: `brew cask createzap flux`
 
 Output:
@@ -25,7 +27,7 @@ zap delete: [
      trash: [
              '~/Library/Application Support/Flux',
              '~/Library/Preferences/org.herf.Flux.plist',
-             ]
+            ]
 ```
 
 TODO:
