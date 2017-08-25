@@ -22,7 +22,7 @@ readonly DELETE_PATHS=(
   "$HOME/Library/Group Containers"
   "$HOME/Library/LaunchAgents"
   "$HOME/Library/Logs"
-#  "$HOME/Library/PreferencePanes"
+  "$HOME/Library/PreferencePanes"
   "$HOME/Library/Saved Application State"
   "$HOME/Library/WebKit"
   "$HOME/Music"
@@ -80,25 +80,24 @@ find_in_paths() {
   let i=1
   for dir in "${DELETE_PATHS[@]}"; do
     cd "$dir"
-    ls -d1 "$PWD/"* | grep -i "$1" >> $TMP_FILE_DELETE
+    for path in "$PWD"/*; do grep -iq "$1" <<< "$path" && echo "$path" >> $TMP_FILE_DELETE; done
   done
   i=0
   for dir in "${TRASH_PATHS[@]}"; do
     cd "$dir"
-    ls -d1 "$PWD/"* | grep -i "$1" >> $TMP_FILE_TRASH
+    for path in "$PWD"/*; do grep -iq "$1" <<< "$path" && echo "$path" >> $TMP_FILE_TRASH; done
   done
 }
 
 find_in_home_folder() {
-  cd $HOME
-  ls -d1 "$PWD/".* | grep -i "$1" >> $TMP_FILE_TRASH
+  find ~ -maxdepth 1 | grep -i "$1" >> $TMP_FILE_TRASH
 }
 
 generate() {
   delete_lines=$(cat $TMP_FILE_DELETE | wc -l)
   trash_lines=$(cat $TMP_FILE_TRASH | wc -l)
   if [ $delete_lines == 0 ] && [ $trash_lines == 0 ]; then
-    echo "No $1 setting found."
+    echo "No $1 settings found."
   elif [ $delete_lines == 0 ] && [ $trash_lines == 1 ]; then
     path=$(cat $TMP_FILE_TRASH)
     echo "zap trash: '${path/$HOME/~}'"

@@ -21,7 +21,6 @@ Output:
 zap delete: [
              '~/Library/Caches/org.herf.Flux',
              '~/Library/Containers/com.justgetflux.flux',
-             '~/Library/Containers/com.justgetflux.flux',
              '~/Library/Cookies/org.herf.Flux.binarycookies',
             ],
      trash: [
@@ -29,7 +28,3 @@ zap delete: [
              '~/Library/Preferences/org.herf.Flux.plist',
             ]
 ```
-
-TODO:
-- Fix "ls: ~/Library/PreferencePanes/*: No such file or directory" when dir is empty
-- Uncomment ~/Library/PreferencePanes when above is fixed
