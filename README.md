@@ -12,12 +12,17 @@ A `brew cask` [external command](https://github.com/caskroom/homebrew-cask/blob/
 ...
 ```
 
-Install: `curl https://raw.githubusercontent.com/nrlquaker/brewcask-createzap/master/brewcask-createzap -s -o /usr/local/bin/brewcask-createzap`
+Install:
+
+```
+curl https://raw.githubusercontent.com/nrlquaker/brewcask-createzap/master/brewcask-createzap -s -o /usr/local/bin/brewcask-createzap
+chmod +x /usr/local/bin/brewcask-createzap
+```
 
 Usage: `brew cask createzap flux`
 
 Output:
-```
+```ruby
 zap delete: [
              '~/Library/Caches/org.herf.Flux',
              '~/Library/Containers/com.justgetflux.flux',
