@@ -33,7 +33,6 @@ readonly DELETE_PATHS=(
   "/Library/ScriptingAdditions"
   "/Library/Services"
   "/etc/newsyslog.d"
-  "/tmp"
 )
 readonly TRASH_PATHS=(
   "$HOME/Documents"
