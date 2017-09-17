@@ -14,7 +14,7 @@ A `brew cask` [external command](https://github.com/caskroom/homebrew-cask/blob/
 
 Install:
 
-```
+```sh
 curl https://raw.githubusercontent.com/nrlquaker/brewcask-createzap/master/brewcask-createzap -s -o /usr/local/bin/brewcask-createzap
 chmod +x /usr/local/bin/brewcask-createzap
 ```
