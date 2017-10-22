@@ -108,6 +108,20 @@ generate() {
     echo "zap delete: '${path/$HOME/~}',"
     path=$(cat $TMP_FILE_TRASH)
     echo "     trash: '${path/$HOME/~}'"
+  elif [ $delete_lines == 0 ] && [ $trash_lines > 1 ]; then
+    echo "zap trash: ["
+    cat $TMP_FILE_TRASH | while read path
+    do
+       echo "             '${path/$HOME/~}',"
+    done
+    echo '           ]'
+  elif [ $delete_lines > 1 ] && [ $trash_lines == 0 ]; then
+    echo "zap delete: ["
+    cat $TMP_FILE_DELETE | while read path
+    do
+       echo "             '${path/$HOME/~}',"
+    done
+    echo '            ]'
   elif [ $delete_lines == 1 ] && [ $trash_lines > 1 ]; then
     path=$(cat $TMP_FILE_DELETE)
     echo "zap delete: '${path/$HOME/~}',"
