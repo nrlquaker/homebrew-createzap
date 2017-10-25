@@ -20,6 +20,7 @@ readonly DELETE_PATHS=(
   "$HOME/Library/Containers"
   "$HOME/Library/Cookies"
   "$HOME/Library/Group Containers"
+  "$HOME/Library/Internet Plug-Ins"
   "$HOME/Library/LaunchAgents"
   "$HOME/Library/Logs"
   "$HOME/Library/PreferencePanes"
@@ -35,6 +36,7 @@ readonly DELETE_PATHS=(
   "/etc/newsyslog.d"
 )
 readonly TRASH_PATHS=(
+  "$HOME/Desktop"
   "$HOME/Documents"
   "$HOME/Library/Application Support"
   "$HOME/Library/Preferences"
