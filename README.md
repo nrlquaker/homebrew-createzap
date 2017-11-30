@@ -27,13 +27,11 @@ chmod +x /usr/local/bin/brewcask-createzap
 Output:
 
 ```ruby
-zap delete: [
+zap trash: [
+             '~/Library/Application Support/Flux',
              '~/Library/Caches/org.herf.Flux',
              '~/Library/Containers/com.justgetflux.flux',
              '~/Library/Cookies/org.herf.Flux.binarycookies',
-            ],
-     trash: [
-             '~/Library/Application Support/Flux',
              '~/Library/Preferences/org.herf.Flux.plist',
-            ]
+           ]
 ```
