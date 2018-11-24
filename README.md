@@ -1,4 +1,4 @@
-# brewcask-createzap
+# homebrew-createzap
 
 A `brew cask` [external command](https://github.com/caskroom/homebrew-cask/blob/22009279693c55d7eb00f0b85b8b2f8b062fcd21/doc/hacking.md#external-commands) that generates [zap stanza](https://github.com/caskroom/homebrew-cask/blob/b9e51323b5593e2b46ef4f45c163e5fe25101079/doc/cask_language_reference/stanzas/zap.md). It scans common places for leftover files, such as:
 
@@ -16,8 +16,7 @@ A `brew cask` [external command](https://github.com/caskroom/homebrew-cask/blob/
 ## Installation
 
 ```sh
-curl https://raw.githubusercontent.com/nrlquaker/brewcask-createzap/master/brewcask-createzap -s -o /usr/local/bin/brewcask-createzap
-chmod +x /usr/local/bin/brewcask-createzap
+brew tap nrlquaker/createzap
 ```
 
 ## Usage
