@@ -75,8 +75,10 @@ create_tmp() {
 
 find_in_paths() {
   for dir in "${TRASH_PATHS[@]}"; do
-    cd "$dir"
-    for path in "$PWD"/*; do grep -iq "$1" <<< "$path" && echo "$path" >> $TMP_FILE; done
+    if [[ -d "$dir" ]]; then
+      cd "$dir"
+      for path in "$PWD"/*; do grep -iq "$1" <<< "$path" && echo "$path" >> $TMP_FILE; done
+    fi
   done
 }
 
