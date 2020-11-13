@@ -27,10 +27,10 @@ Output:
 
 ```ruby
 zap trash: [
-             '~/Library/Application Support/Flux',
-             '~/Library/Caches/org.herf.Flux',
-             '~/Library/Containers/com.justgetflux.flux',
-             '~/Library/Cookies/org.herf.Flux.binarycookies',
-             '~/Library/Preferences/org.herf.Flux.plist',
-           ]
+  "~/Library/Application Support/Flux",
+  "~/Library/Caches/org.herf.Flux",
+  "~/Library/Containers/com.justgetflux.flux",
+  "~/Library/Cookies/org.herf.Flux.binarycookies",
+  "~/Library/Preferences/org.herf.Flux.plist",
+]
 ```
