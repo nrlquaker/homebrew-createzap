@@ -92,14 +92,14 @@ generate() {
     echo "No $1 settings found."
   elif [ $trash_lines == 1 ]; then
     path=$(cat $TMP_FILE)
-    echo "zap trash: '${path/$HOME/~}'"
+    echo "zap trash: \"${path/$HOME/~}\""
   else
     echo "zap trash: ["
     cat $TMP_FILE | while read path
     do
-       echo "             '${path/$HOME/~}',"
+       echo "  \"${path/$HOME/~}\","
     done
-    echo '           ]'
+    echo ']'
   fi
 }
 
