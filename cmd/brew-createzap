@@ -1,11 +1,11 @@
 #!/bin/bash
 #
-# brewcask-createzap
+# brew-createzap
 #
-# A `brew cask` external command that generates zap stanza.
+# A `brew` external command that generates zap stanza.
 # Example usage:
 #
-#     brew cask createzap appname
+#     brew createzap appname
 #
 
 readonly TMP_FILE="/tmp/brewcask-createzap"
@@ -55,12 +55,12 @@ check_args() {
   if [ $# != 1 ]
   then
     cat <<EOS
-Usage: brew cask createzap appname
+Usage: brew createzap appname
 
 Given an Application name (full or partial), find all
 preferences items associated with that app and creates
 zap stanza, which you can copy to new formula created
-by 'brew cask create my-new-cask'
+by 'brew create --cask my-new-cask'
 
 Note that you will likely need to have opened the app
 at least once for any preference items to be present.
