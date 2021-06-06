@@ -1,6 +1,6 @@
 # brew-createzap
 
-A `brew` [external command](https://github.com/Homebrew/brew/blob/master/docs/External-Commands.md) that generates [zap stanza](https://github.com/Homebrew/homebrew-cask/blob/master/doc/cask_language_reference/stanzas/zap.md). It scans common places for leftover files, such as:
+A `brew` [external command](https://github.com/Homebrew/brew/blob/master/docs/External-Commands.md) that generates [zap stanza](https://docs.brew.sh/Cask-Cookbook#stanza-zap). It scans common places for leftover files, such as:
 
 ```sh
 ~/Library/Application Support
