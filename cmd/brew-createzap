@@ -8,7 +8,7 @@
 #     brew createzap appname
 #
 
-readonly TMP_FILE="/tmp/brewcask-createzap"
+readonly TMP_FILE=$(mktemp /tmp/brewcask-createzap.XXXXXX)
 readonly TRASH_PATHS=(
   "$HOME/Desktop"
   "$HOME/Documents"
@@ -95,7 +95,7 @@ generate() {
     echo "zap trash: \"${path/$HOME/~}\""
   else
     echo "zap trash: ["
-    cat $TMP_FILE | while read path
+    cat $TMP_FILE | sort | while read path
     do
        echo "  \"${path/$HOME/~}\","
     done
