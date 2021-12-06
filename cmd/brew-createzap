@@ -31,6 +31,7 @@ readonly TRASH_PATHS=(
   "$HOME/Library/WebKit"
   "$HOME/Music"
   "/Library/Application Support"
+  "/Library/Caches"
   "/Library/LaunchDaemons"
   "/Library/PreferencePanes"
   "/Library/Preferences"
