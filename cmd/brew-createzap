@@ -22,6 +22,7 @@ readonly TRASH_PATHS=(
   "$HOME/Library/Containers"
   "$HOME/Library/Cookies"
   "$HOME/Library/Group Containers"
+  "$HOME/Library/HTTPStorages"
   "$HOME/Library/Internet Plug-Ins"
   "$HOME/Library/LaunchAgents"
   "$HOME/Library/Logs"
