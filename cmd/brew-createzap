@@ -96,10 +96,10 @@ generate() {
     path=$(cat $TMP_FILE)
     echo "zap trash: \"${path/$HOME/~}\""
   else
-    echo "zap trash: ["
+    echo "zap trash: %w["
     cat $TMP_FILE | sort | while read path
     do
-       echo "  \"${path/$HOME/~}\","
+       echo "  ${path/$HOME/~}"
     done
     echo ']'
   fi
