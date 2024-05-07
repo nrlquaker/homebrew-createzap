@@ -92,6 +92,8 @@ generate() {
   trash_lines=$(cat $TMP_FILE | wc -l)
   if [ $trash_lines == 0 ]; then
     echo "No $1 settings found."
+    echo "Instead of a zap stanza, include the following comment:"
+    echo "# No zap stanza required"
   elif [ $trash_lines == 1 ]; then
     path=$(cat $TMP_FILE)
     echo "zap trash: \"${path/$HOME/~}\""
